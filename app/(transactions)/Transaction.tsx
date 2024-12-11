@@ -1,8 +1,8 @@
 import SoftwareNameHeader from '@/components/Header/SoftwareNameHeader'
 import React from 'react'
 import { Text, View } from 'react-native'
-import today from '../utils/getCurrentYYMM'
-import AppDropdown from '@/components/AppDropdown';
+import today from '../../utils/getCurrentYYMM'
+import MainTransaction from '@/components/MainTransaction';
 
 const Transaction = () => {
     return (
@@ -13,8 +13,7 @@ const Transaction = () => {
 
             <Text>Status: 0 </Text>
 
-            <AppDropdown />
-
+            <MainTransaction />
         </View>
     )
 }

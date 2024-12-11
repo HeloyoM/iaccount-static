@@ -13,14 +13,26 @@ export const Status = () => {
 
             <View style={styles.mainBtns}>
                 <Card style={[styles.card, styles.outcome]}>
-                    <Card.Content>
-                        <Text>Add Outcome</Text>
-                    </Card.Content>
+                    <Link
+                        style={styles.label}
+                        href={{
+                            pathname: '/(transactions)/income',
+                            params: { id: 'bacon' },
+                        }}>
+                        Add Icome
+                    </Link>
                 </Card>
 
                 <Card style={[styles.card, styles.income]}>
                     <Card.Content >
-                        <Link href="/Transaction" style={styles.label}>Add Income</Link>
+                        <Link
+                            style={styles.label}
+                            href={{
+                                pathname: '/(transactions)/outcome',
+                                params: { id: 'bacon' },
+                            }}>
+                            Add Outcome
+                        </Link>
                     </Card.Content>
                 </Card>
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, FlatList, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button } from 'react-native-paper';
-import DropDown from './DropDown';
-import { addOutcome } from '@/api/balance';
+import { addIncome, addOutcome } from '@/api/balance';
 import CreateOutcome from '@/dto/createOutcome.dto';
 import useDropdown from './hooks/useDropdown';
+import { useRoute } from '@react-navigation/native';
+import { Paths } from '@/utils/Paths';
+import { CreateIncome } from '@/dto/createIncome.dto';
 
 const DATA = [
     {
@@ -19,10 +21,14 @@ const DATA = [
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'Clothings',
     },
-];
-const AppDropdown = () => {
+]
+
+const MainTransaction = () => {
     const [amount, setAmount] = React.useState(0);
     const [source, setSource] = useState('');
+
+    const route = useRoute();
+    const currentURL = route.name;
 
     const onSourceSelected = (id: string) => {
         setSource(id)
@@ -30,15 +36,30 @@ const AppDropdown = () => {
         toggleShowingDropwdown()
     }
 
-    const { dropdownButton, showDropdown, list, toggleShowingDropwdown } = useDropdown({ onSourceSelected, data: DATA, source: source, style: styles.button })
+    const {
+        dropdownButton,
+        showDropdown,
+        list,
+        toggleShowingDropwdown
+    } = useDropdown({ onSourceSelected, data: DATA, source: source, style: styles.button })
 
     const addRecord = () => {
-        const outcome: CreateOutcome = {
-            amount,
-            currency: '12',
-            source
+        if (currentURL.split('/')[1] === Paths.OUTCOME) {
+            const outcome: CreateOutcome = {
+                amount,
+                currency: '376',
+                source
+            }
+
+            addOutcome(outcome)
+        } else {
+            const income: CreateIncome = {
+                amount,
+                currency: '376',
+                source
+            }
+            addIncome(income)
         }
-        addOutcome(outcome)
     }
 
     return (
@@ -109,4 +130,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AppDropdown;
+export default MainTransaction;

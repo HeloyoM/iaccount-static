@@ -1,5 +1,4 @@
 import { Paths } from '@/utils/Paths';
-import { useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react'
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
@@ -18,15 +17,14 @@ type Props = {
 const useDropdown = ({ data, style, source, onSourceSelected }: Props) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
-    const { path } = useLocalSearchParams();
-
+    const path = 'outcome'
     const default_placeholder = {
         outcome: 'Category',
         income: 'Source'
     }
 
     const toggleShowingDropwdown = () => {
-        setShowDropdown(prev => !prev)
+        setShowDropdown(prev => !prev);
     }
 
     const selectedPlaceholder = () => {
